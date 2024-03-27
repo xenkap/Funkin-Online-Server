@@ -86,10 +86,9 @@ export class GameRoom extends Room<RoomState> {
     });
 
     this.onMessage("addMiss", (client, message) => {
-      var missCount = message
-      if (this.checkInvalid(message, VerifyTypes.NUMBER)) missCount = 1;
+      if (this.checkInvalid(message ?? 1, VerifyTypes.NUMBER)) return;
       if (this.state.isStarted) {
-        this.getStatePlayer(client).misses += missCount;
+        this.getStatePlayer(client).misses += message;
       }
     });
 
